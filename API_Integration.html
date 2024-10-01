@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <title>API Integration</title>
+    <style>
+        body 
+        { 
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #96b9ed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+        }
+        .container{
+            background-color: #96b9ed;
+            padding:20px;
+            border: 1px solid black;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+        }
+        .btn{
+            display:block;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgb(200, 200, 200);
+            color: black;
+            border: 1px solid black;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%
+        }
+        .btn:hover{
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="getWeatherData()" >Get Weather Data</button>
+    <div id="data"></div>
+
+    <script>
+        function getWeatherData()
+        {
+            fetch('https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API key}')
+            .then(response => response.json())
+            .then(data=>
+                {
+                    data.slice(0,5).forEache(post=>
+                        {
+                            output += '<div> <p>${post.body}</p> </div>';
+                        }
+                    );
+                    document.getElementById('data').innerHTML = output;
+                }
+            );
+        }
+    </script>
+</body>
+</html>
